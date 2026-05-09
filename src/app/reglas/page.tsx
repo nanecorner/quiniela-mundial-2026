@@ -4,7 +4,7 @@ export default function ReglasPage() {
   return (
     <main className="min-h-screen bg-slate-950 text-white p-4 sm:p-8">
       <div className="max-w-3xl mx-auto bg-black/40 border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-md relative overflow-hidden">
-        
+
         {/* Decoración de fondo */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#CFB53B]/10 rounded-full blur-[80px] -mr-20 -mt-20 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#006847]/10 rounded-full blur-[80px] -ml-20 -mb-20 pointer-events-none" />
@@ -17,7 +17,7 @@ export default function ReglasPage() {
               </h1>
               <p className="text-gray-400 mt-2 font-medium">Sistema de puntuación oficial de la quiniela.</p>
             </div>
-            <Link 
+            <Link
               href="/dashboard"
               className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-bold transition-colors"
             >
@@ -26,7 +26,7 @@ export default function ReglasPage() {
           </div>
 
           <div className="space-y-8 text-gray-300">
-            
+
             {/* Sección Partidos Normales */}
             <section>
               <h2 className="text-xl font-bold text-[#CFB53B] mb-4 flex items-center gap-2">
@@ -50,7 +50,7 @@ export default function ReglasPage() {
                   <span className="font-black text-gray-500 text-lg shrink-0 ml-4">0 pts</span>
                 </li>
               </ul>
-              
+
               <div className="mt-4 p-4 bg-[#006847]/10 border border-[#006847]/30 rounded-xl text-sm">
                 <p className="font-bold text-[#006847] mb-2">Ejemplo (Marcador Real: México 2 - 1 Alemania):</p>
                 <ul className="list-disc list-inside space-y-1 text-gray-400">
@@ -100,6 +100,43 @@ export default function ReglasPage() {
                     <span className="font-black text-[#006847] text-lg shrink-0 ml-4">10 pts</span>
                   </li>
                 </ul>
+              </div>
+            </section>
+            {/* Sección Premiación */}
+            <section>
+              <h2 className="text-xl font-bold text-[#CFB53B] mb-4 flex items-center gap-2">
+                💰 Premiación
+              </h2>
+              <div className="bg-white/5 p-5 rounded-2xl border border-white/5 space-y-4">
+                <ul className="space-y-3">
+                  <li className="flex justify-between items-center">
+                    <span><strong>Primer Lugar:</strong></span>
+                    <span className="font-black text-[#CFB53B] text-lg shrink-0 ml-4">65%</span>
+                  </li>
+                  <li className="flex justify-between items-center">
+                    <span><strong>Segundo Lugar:</strong></span>
+                    <span className="font-black text-gray-300 text-lg shrink-0 ml-4">25%</span>
+                  </li>
+                  <li className="flex justify-between items-center text-gray-500">
+                    <span>Organización (Host y BD):</span>
+                    <span className="font-bold text-sm shrink-0 ml-4">10%</span>
+                  </li>
+                </ul>
+
+                <div className="pt-4 border-t border-white/10 text-sm space-y-3 text-gray-400">
+                  <p>
+                    🥇 <strong className="text-white">Empate en 1er lugar:</strong> Si hay empate total en la primera posición, se sumarán los premios de primer y segundo lugar (<strong className="text-white">90%</strong>) y se repartirán equitativamente entre los ganadores.
+                  </p>
+                  <p>
+                    🥈 <strong className="text-white">Empate en 2do lugar:</strong> Si el primer lugar es único pero hay empate en la segunda posición, el <strong className="text-white">25%</strong> se repartirá equitativamente entre los que empaten.
+                  </p>
+                  <p>
+                    ⚙️ <strong className="text-white">Gastos Operativos:</strong> El <strong className="text-white">10%</strong> destinado a la organización se utiliza exclusivamente para cubrir los costos de mantenimiento del servidor, el dominio y el servicio de base de datos que sostienen el aplicativo.
+                  </p>
+                  <p>
+                    🔍 <strong className="text-white">Criterio de Desempate:</strong> El ganador es quien sume más puntos. Si hay empate en puntos, el primer criterio de desempate será la <strong className="text-white">mayor cantidad de marcadores exactos</strong> (5 pts) acertados.
+                  </p>
+                </div>
               </div>
             </section>
 

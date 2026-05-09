@@ -22,22 +22,20 @@ const MEXICO_STAGES = [
   { id: 'round_of_16', label: 'Octavos de Final' },
   { id: 'quarter_finals', label: 'Cuartos de Final' },
   { id: 'semi_finals', label: 'Semifinales' },
-  { id: 'third_place', label: 'Tercer Lugar' },
-  { id: 'runner_up', label: 'Subcampeón' },
-  { id: 'champion', label: 'Campeón' },
+  { id: 'final', label: 'Final' },
 ]
 
-export default function BonusCard({ 
-  teams, 
+export default function BonusCard({
+  teams,
   bonusPrediction,
-  isLocked 
-}: { 
+  isLocked
+}: {
   teams: Team[]
   bonusPrediction?: BonusPrediction
   isLocked: boolean
 }) {
   const [isPending, startTransition] = useTransition()
-  const [message, setMessage] = useState<{type: 'success'|'error', text: string} | null>(null)
+  const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -60,7 +58,7 @@ export default function BonusCard({
 
   return (
     <div className="bg-[#CFB53B]/10 border border-[#CFB53B]/50 rounded-2xl p-6 shadow-xl backdrop-blur-md mb-10 relative overflow-hidden">
-      
+
       <div className="absolute top-0 right-0 w-32 h-32 bg-[#CFB53B]/20 rounded-full blur-[50px] -mr-10 -mt-10" />
 
       <div className="relative z-10">
@@ -81,13 +79,13 @@ export default function BonusCard({
         </div>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
+
           {/* Campeón */}
           <div className="flex flex-col gap-2">
             <label className="text-sm font-bold text-[#CFB53B] uppercase tracking-wider" htmlFor="champion_team_id">
               🥇 Campeón (+15 pts)
             </label>
-            <select 
+            <select
               id="champion_team_id"
               name="champion_team_id"
               defaultValue={bonusPrediction?.champion_team_id || ''}
@@ -107,7 +105,7 @@ export default function BonusCard({
             <label className="text-sm font-bold text-gray-300 uppercase tracking-wider" htmlFor="runner_up_team_id">
               🥈 Subcampeón (+10 pts)
             </label>
-            <select 
+            <select
               id="runner_up_team_id"
               name="runner_up_team_id"
               defaultValue={bonusPrediction?.runner_up_team_id || ''}
@@ -127,7 +125,7 @@ export default function BonusCard({
             <label className="text-sm font-bold text-[#006847] uppercase tracking-wider" htmlFor="mexico_stage">
               🇲🇽 Destino de México (+10 pts)
             </label>
-            <select 
+            <select
               id="mexico_stage"
               name="mexico_stage"
               defaultValue={bonusPrediction?.mexico_stage || ''}
@@ -148,7 +146,7 @@ export default function BonusCard({
               {message?.type === 'success' && <span className="text-[#006847] bg-[#006847]/20 px-3 py-1 rounded-md">{message.text}</span>}
               {message?.type === 'error' && <span className="text-[#da291c] bg-[#da291c]/20 px-3 py-1 rounded-md">{message.text}</span>}
             </div>
-            
+
             {!isLocked && (
               <button
                 type="submit"
