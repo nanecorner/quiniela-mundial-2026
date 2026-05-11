@@ -132,13 +132,16 @@ export default async function LeaderboardPage() {
                         </div>
                       </td>
                       <td className="p-4">
-                        <p className={`font-bold ${isMe ? 'text-[#CFB53B]' : 'text-white'}`}>
-                          {player.name}
-                          {isMe && <span className="ml-2 text-xs bg-[#006847] text-white px-2 py-0.5 rounded-full">Tú</span>}
-                        </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          Marcadores exactos: <strong className="text-[#CFB53B]">{player.exactMatchesCount}</strong>
-                        </p>
+                        <Link href={`/posiciones/${player.id}`} className="group/link block">
+                          <p className={`font-bold group-hover/link:underline underline-offset-2 ${isMe ? 'text-[#CFB53B]' : 'text-white'}`}>
+                            {player.name}
+                            {isMe && <span className="ml-2 text-xs bg-[#006847] text-white px-2 py-0.5 rounded-full">Tú</span>}
+                            <span className="ml-2 text-[10px] text-gray-600 group-hover/link:text-gray-400 font-normal transition-colors">ver →</span>
+                          </p>
+                          <p className="text-xs text-gray-500 mt-1">
+                            Marcadores exactos: <strong className="text-[#CFB53B]">{player.exactMatchesCount}</strong>
+                          </p>
+                        </Link>
                       </td>
                       <td className="p-4 text-center text-gray-400 hidden sm:table-cell">
                         {player.matchPoints}
