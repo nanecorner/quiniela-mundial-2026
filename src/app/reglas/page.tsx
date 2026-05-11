@@ -111,14 +111,14 @@ export default function ReglasPage() {
                 <ul className="space-y-3">
                   <li className="flex justify-between items-center">
                     <span><strong>Primer Lugar:</strong></span>
-                    <span className="font-black text-[#CFB53B] text-lg shrink-0 ml-4">65%</span>
+                    <span className="font-black text-[#CFB53B] text-lg shrink-0 ml-4">70%</span>
                   </li>
                   <li className="flex justify-between items-center">
                     <span><strong>Segundo Lugar:</strong></span>
-                    <span className="font-black text-gray-300 text-lg shrink-0 ml-4">25%</span>
+                    <span className="font-black text-gray-300 text-lg shrink-0 ml-4">20%</span>
                   </li>
                   <li className="flex justify-between items-center text-gray-500">
-                    <span>Organización (Host y BD):</span>
+                    <span>Organización:</span>
                     <span className="font-bold text-sm shrink-0 ml-4">10%</span>
                   </li>
                 </ul>
@@ -131,7 +131,7 @@ export default function ReglasPage() {
                     🥈 <strong className="text-white">Empate en 2do lugar:</strong> Si el primer lugar es único pero hay empate en la segunda posición, el <strong className="text-white">25%</strong> se repartirá equitativamente entre los que empaten.
                   </p>
                   <p>
-                    ⚙️ <strong className="text-white">Gastos Operativos:</strong> El <strong className="text-white">10%</strong> destinado a la organización se utiliza exclusivamente para cubrir los costos de mantenimiento del servidor, el dominio y el servicio de base de datos que sostienen el aplicativo.
+                    ⚙️ <strong className="text-white">Gastos Operativos:</strong> El <strong className="text-white">10%</strong> destinado a la organización se utiliza para cubrir los costos de mantenimiento del servidor, el dominio y el servicio de base de datos que sostienen el aplicativo.
                   </p>
                   <p>
                     🔍 <strong className="text-white">Criterio de Desempate:</strong> El ganador es quien sume más puntos. Si hay empate en puntos, el primer criterio de desempate será la <strong className="text-white">mayor cantidad de marcadores exactos</strong> (5 pts) acertados.
