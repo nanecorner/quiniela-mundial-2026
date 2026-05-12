@@ -161,7 +161,7 @@ export default async function DashboardPage() {
         <section>
           <div className="flex justify-between items-end mb-6 border-b border-white/10 pb-4">
             <h2 className="text-2xl font-bold uppercase tracking-widest text-[#CFB53B]">Partidos</h2>
-            <p className="text-sm text-gray-400">Guarda antes de que empiece</p>
+            <p className="text-sm text-gray-400">Guarda tu predicción antes de que empiece el partido.</p>
           </div>
 
           {matches && matches.length > 0 ? (

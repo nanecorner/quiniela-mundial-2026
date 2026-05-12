@@ -42,7 +42,7 @@ export default function ReglasPage() {
                   <span className="font-black text-[#CFB53B] text-lg shrink-0 ml-4">3 pts</span>
                 </li>
                 <li className="flex justify-between items-center">
-                  <span><strong>Solo Tendencia:</strong> Acertar solamente el ganador (o empate).</span>
+                  <span><strong>Solo Tendencia:</strong> Acertar solamente el ganador.</span>
                   <span className="font-black text-[#CFB53B] text-lg shrink-0 ml-4">2 pts</span>
                 </li>
                 <li className="flex justify-between items-center">
@@ -68,10 +68,12 @@ export default function ReglasPage() {
               <h2 className="text-xl font-bold text-[#CFB53B] mb-4 flex items-center gap-2">
                 ⚔️ Eliminatorias Directas
               </h2>
-              <div className="bg-white/5 p-5 rounded-2xl border border-white/5">
-                <p className="mb-3">En las fases eliminatorias (Octavos de final en adelante), el sistema de puntos por goles se mantiene igual, pero hay un bono especial:</p>
-                <div className="flex justify-between items-center">
-                  <span><strong>Equipo que avanza:</strong> Acertar qué equipo clasifica a la siguiente ronda (sin importar si es en tiempo regular, tiempos extra o penales).</span>
+              <div className="bg-white/5 p-5 rounded-2xl border border-white/5 space-y-4">
+                <p>
+                  En las fases eliminatorias (Dieciseisavos de final en adelante), el sistema de puntos por goles se mantiene igual. El marcador oficial para el cálculo de puntos <strong>incluye el tiempo regular y el tiempo extra</strong> (en caso de haberlo), pero <strong>no incluye la tanda de penales</strong>.
+                </p>
+                <div className="flex justify-between items-center pt-3 border-t border-white/5">
+                  <span><strong>Equipo que avanza:</strong> Acertar qué equipo clasifica a la siguiente ronda (ya sea en tiempo regular, extras o penales).</span>
                   <span className="font-black text-[#da291c] text-lg shrink-0 ml-4">+2 pts</span>
                 </div>
               </div>
@@ -125,16 +127,16 @@ export default function ReglasPage() {
 
                 <div className="pt-4 border-t border-white/10 text-sm space-y-3 text-gray-400">
                   <p>
+                    🔍 <strong className="text-white">Criterio de Desempate:</strong> El ganador es quien sume más puntos. Si hay empate en puntos, el primer criterio de desempate será la <strong className="text-white">mayor cantidad de marcadores exactos</strong> (5 pts) acertados.
+                  </p>
+                  <p>
                     🥇 <strong className="text-white">Empate en 1er lugar:</strong> Si hay empate total en la primera posición, se sumarán los premios de primer y segundo lugar (<strong className="text-white">90%</strong>) y se repartirán equitativamente entre los ganadores.
                   </p>
                   <p>
-                    🥈 <strong className="text-white">Empate en 2do lugar:</strong> Si el primer lugar es único pero hay empate en la segunda posición, el <strong className="text-white">25%</strong> se repartirá equitativamente entre los que empaten.
+                    🥈 <strong className="text-white">Empate en 2do lugar:</strong> Si el primer lugar es único pero hay empate en la segunda posición, el <strong className="text-white">20%</strong> se repartirá equitativamente entre los que empaten.
                   </p>
                   <p>
                     ⚙️ <strong className="text-white">Gastos Operativos:</strong> El <strong className="text-white">10%</strong> destinado a la organización se utiliza para cubrir los costos de mantenimiento del servidor, el dominio y el servicio de base de datos que sostienen el aplicativo.
-                  </p>
-                  <p>
-                    🔍 <strong className="text-white">Criterio de Desempate:</strong> El ganador es quien sume más puntos. Si hay empate en puntos, el primer criterio de desempate será la <strong className="text-white">mayor cantidad de marcadores exactos</strong> (5 pts) acertados.
                   </p>
                 </div>
               </div>

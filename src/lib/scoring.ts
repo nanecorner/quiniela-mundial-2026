@@ -1,3 +1,8 @@
+/**
+ * @param isKnockoutStage - Indica si el partido es de eliminación directa.
+ * NOTA: En eliminatorias, el marcador (actualHomeScore/actualAwayScore) debe incluir 
+ * el tiempo regular y el tiempo extra, pero EXCLUIR la tanda de penales.
+ */
 export function calculateMatchPoints(
   predictedHomeScore: number,
   predictedAwayScore: number,
