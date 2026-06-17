@@ -57,7 +57,23 @@ export default async function DashboardPage() {
     .single();
 
   // Calcular ranking (Posición del usuario actual comparado con los demás)
-  const { data: allPredictions } = await supabase.from('predictions').select('user_id, points');
+  let allPredictions: any[] = [];
+  let from = 0;
+  const step = 1000;
+  let hasMore = true;
+  while (hasMore) {
+    const { data } = await supabase
+      .from('predictions')
+      .select('user_id, points, match_id, predicted_home_score, predicted_away_score')
+      .range(from, from + step - 1);
+    if (data && data.length > 0) {
+      allPredictions = allPredictions.concat(data);
+      if (data.length < step) hasMore = false;
+      else from += step;
+    } else {
+      hasMore = false;
+    }
+  }
   const { data: allBonus } = await supabase.from('bonus_predictions').select('user_id, points');
   const { data: allProfiles } = await supabase.from('profiles').select('id');
 
@@ -67,16 +83,26 @@ export default async function DashboardPage() {
     .select('*')
     .eq('user_id', user.id);
 
+  const matchesMap = new Map(matches?.filter((m: any) => m.status === 'finished').map((m: any) => [m.id, m]) || []);
+
   let myRank = 1;
   const myTotal = totalPoints + (bonusPrediction?.points || 0);
-  const myExactMatches = userPredictions?.filter(p => p.points === 5).length || 0;
+  const myExactMatches = userPredictions?.filter(p => {
+    const match = matchesMap.get(p.match_id);
+    if (!match || match.home_score === null || match.away_score === null) return false;
+    return p.predicted_home_score === match.home_score && p.predicted_away_score === match.away_score;
+  }).length || 0;
 
   if (allProfiles && allPredictions) {
     const leaderStats = allProfiles.map(prof => {
       const userPreds = allPredictions.filter(p => p.user_id === prof.id);
       const pPts = userPreds.reduce((sum, p) => sum + (p.points || 0), 0);
       const bPts = allBonus?.filter(b => b.user_id === prof.id).reduce((sum, b) => sum + (b.points || 0), 0) || 0;
-      const exacts = userPreds.filter(p => p.points === 5).length;
+      const exacts = userPreds.filter(p => {
+        const match = matchesMap.get(p.match_id);
+        if (!match || match.home_score === null || match.away_score === null) return false;
+        return p.predicted_home_score === match.home_score && p.predicted_away_score === match.away_score;
+      }).length;
       return { total: pPts + bPts, exacts };
     });
 

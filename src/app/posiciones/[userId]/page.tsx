@@ -89,11 +89,17 @@ export default async function PlayerPredictionsPage({
 
   const predMap = new Map(predictions?.map(p => [p.match_id, p]) ?? []);
 
+  const matchesMap = new Map(matches?.filter((m: any) => m.status === 'finished').map((m: any) => [m.id, m]) || []);
+
   const matchPoints = predictions?.reduce((s, p) => s + (p.points || 0), 0) ?? 0;
   const bonusPoints = bonusPrediction?.points ?? 0;
   const totalPoints = matchPoints + bonusPoints;
-  // Exacto = 5pts (marcador exacto) o 7pts (exacto + acertó quién avanza en eliminatoria)
-  const exactMatches = predictions?.filter(p => (p.points ?? 0) === 5 || (p.points ?? 0) === 7).length ?? 0;
+  // Exacto = comparando marcador de la predicción con el resultado real
+  const exactMatches = predictions?.filter(p => {
+    const match = matchesMap.get(p.match_id);
+    if (!match || match.home_score === null || match.away_score === null) return false;
+    return p.predicted_home_score === match.home_score && p.predicted_away_score === match.away_score;
+  }).length ?? 0;
 
   return (
     <main className="min-h-screen bg-slate-950 text-white p-4 sm:p-8">

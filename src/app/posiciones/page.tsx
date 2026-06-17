@@ -21,7 +21,31 @@ export default async function LeaderboardPage() {
   }
 
   // 2. Obtener todas las predicciones y sumar puntos
-  const { data: predictions } = await supabase.from('predictions').select('user_id, points');
+  // 2. Obtener todas las predicciones y sumar puntos
+  let predictions: any[] = [];
+  let from = 0;
+  const step = 1000;
+  let hasMore = true;
+  while (hasMore) {
+    const { data } = await supabase
+      .from('predictions')
+      .select('user_id, points, match_id, predicted_home_score, predicted_away_score')
+      .range(from, from + step - 1);
+    if (data && data.length > 0) {
+      predictions = predictions.concat(data);
+      if (data.length < step) hasMore = false;
+      else from += step;
+    } else {
+      hasMore = false;
+    }
+  }
+
+  // Obtener partidos terminados para validar marcadores exactos
+  const { data: finishedMatches } = await supabase
+    .from('matches')
+    .select('id, home_score, away_score')
+    .eq('status', 'finished');
+  const matchesMap = new Map(finishedMatches?.map(m => [m.id, m]) || []);
   
   // 3. Obtener todos los bonus y sumar puntos
   const { data: bonusPredictions } = await supabase.from('bonus_predictions').select('user_id, points');
@@ -35,8 +59,12 @@ export default async function LeaderboardPage() {
 
     const matchPoints = userPredictions.reduce((sum, p) => sum + (p.points || 0), 0);
     const bonusPoints = userBonus.reduce((sum, b) => sum + (b.points || 0), 0);
-    // Marcadores exactos (los que valen 5 puntos)
-    const exactMatchesCount = userPredictions.filter(p => p.points === 5).length;
+    // Marcadores exactos (comparando con el resultado real)
+    const exactMatchesCount = userPredictions.filter(p => {
+      const match = matchesMap.get(p.match_id);
+      if (!match || match.home_score === null || match.away_score === null) return false;
+      return p.predicted_home_score === match.home_score && p.predicted_away_score === match.away_score;
+    }).length;
 
     return {
       id: profile.id,
