@@ -217,7 +217,7 @@ export default async function PlayerPredictionsPage({
                 let pointsBadge = null;
                 if (isFinished && pred !== undefined) {
                   const pts = pred?.points ?? 0;
-                  const isExact = pts === 5 || pts === 7;
+                  const isExact = isKnockout ? pts === 7 : (pts === 5 || pts === 7);
                   pointsBadge = {
                     label: `${isExact ? '⭐ ' : ''}${pts} pts`,
                     color: isExact
